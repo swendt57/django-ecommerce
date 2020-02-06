@@ -3,4 +3,4 @@
 *.pyc
 __pycache__/
 venv/
-env.py
+env.pygit reset
