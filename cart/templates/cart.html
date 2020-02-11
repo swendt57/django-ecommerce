@@ -3,7 +3,7 @@
 {% load bootstrap_tags %}
 
 {% block content %}
-
+<p>ON THE CART PAGE</p>
 <div class="row row-flex">
     {% for item in cart_items %}
         <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-display">
@@ -11,18 +11,22 @@
 
         <div class="caption">
             <h3>{{ item.product.name }}</h3>
-            <p class="product-description"> {{ item.prodcut.description }}</p>
+            <p class="product-description"> {{ item.product.description }}</p>
             <p>{{ item.product.price }}</p>
             <p>
             <form method="POST" action="{%  url 'adjust_cart' item.id %}" class="form-inline">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="exampleInputAmount" class="sr-omly">New Qty</label>
-                    <div class="input-group-addon">Qty</div>
-                    <input type="number" class="form-control" name="quantity" min="0" max="999">
-                    <div class="input-group-addon">{{ item.quantity }}</div>
+                    <div class="input-group-addon">
+                        <p>Qty: {{ item.quantity }}</p>
+                    </div>
+                    <div class="input-group-addon">
+                        <label for="quantity">New Qty</label>
+                        <input type="number" class="form-control" name="quantity" min="0" max="999">
+                        <button type="submit" class="btm btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                    </div>
                 </div>
-                <button type="submit" class="btm btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+
             </form>
             </p>
         </div>
@@ -31,8 +35,8 @@
 </div>
 <div class="row">
     <p>Total</p>
-    <p><span class="glyphicon glyphicon-us" aria="hidden"></span>{{ total }}</p>
-    <a href="/" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign"></span>Checkout</a>
+    <p><span class="glyphicon glyphicon-usd" aria="hidden"></span>{{ total }}</p>
+    <a href=" {% url 'checkout' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign"></span> Checkout</a>
 </div>
 
 {% endblock %}

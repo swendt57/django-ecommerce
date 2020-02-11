@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, reverse
 
 def view_cart(request):
     """Renders the cart contents page"""
+    print("in view cart")
     return render(request, 'cart.html')
     # don't have top pass in a dictionary of contents because cart is available everywhere in the app. It was registerd
     # in settings.py in TEMPLATES>OPTIONS> content_processors
