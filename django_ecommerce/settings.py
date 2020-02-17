@@ -119,6 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailAuth',
 ]
 
 # Internationalization
@@ -133,11 +134,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'accounts.backends.EmailAuth'
-]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -173,3 +169,16 @@ STRIPE_PUBLISHABLE = os.environ.get('STRIPE_PUBLISHABLE')
 STRIPE_SECRET = os.environ.get('STRIPE_SECRET')
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # email not actually sent - used for development
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465
+# EMAIL_USE_TLS = True  # non secure
+# EMAIL_PORT = 587  #non secure
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_ADDRESS')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+# SERVER_EMAIL = 'stevewendt@cox.net'
+
